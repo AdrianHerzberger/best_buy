@@ -7,14 +7,16 @@ product_list = [
     Product("Google Pixel 7", price=500, quantity=250),
 ]
 
-
-def start(best_buy):
+def command_line_menu():
     print(f"Store Menu\n----------")
     print(
         f"1. List all products in store\n2. Show total amount in store\n3. Make an order\n4. Quit"
     )
+
+def start(best_buy):
     while True:
         try:
+            command_line_menu()
             user_input = int(input("Please choose a number: "))
             if user_input == 1:
                 products = best_buy.get_all_products()
@@ -30,7 +32,9 @@ def start(best_buy):
                 if 1 <= product_number <= len(best_buy.products):
                     quantity = int(input("Enter the quantity: "))
                     product = best_buy.products[product_number - 1]
+                    print("Product added to the list!")
                     print(f"Total price: ${best_buy.order([(product, quantity)])}")
+                    print("")
                 else:
                     print("Invalid product number.")
             elif user_input == 4:
