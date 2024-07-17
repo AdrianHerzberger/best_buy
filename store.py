@@ -20,12 +20,13 @@ class Store:
             total_quantity += product.get_quantity()
         return total_quantity
 
-    def get_all_products(self) -> List[Product]:
-        active_products = []
+    def get_all_products(self) -> List[str]:
+        product_list = []
         for product in self.products:
             if product.is_active():
-                active_products.append(product)
-        return active_products
+                product_info = f"{product.product_name}, Price: ${product.price}, Quantity: {product.get_quantity()}"
+                product_list.append(product_info)
+        return product_list
 
     def order(self, shopping_list: List[Tuple[Product, int]]) -> float:
         total_price = 0
@@ -34,11 +35,3 @@ class Store:
                 total_price += product.buy(quantity)
         return total_price
 
-
-bose = Product("Bose QuietComfort Earbuds", price=250, quantity=500)
-mac = Product("MacBook Air M2", price=1450, quantity=100)
-
-store = Store([bose, mac])
-
-pixel = Product("Google Pixel 7", price=500, quantity=250)
-store.add_product(pixel)
