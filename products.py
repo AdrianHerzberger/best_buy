@@ -2,11 +2,9 @@ import json
 
 
 class Product:
-    def __init__(self, product_name, price, quantity):
-        if not product_name or price < 0 or quantity < 0:
-            raise ValueError(
-                "Invalid input: Name cannot be empty, and price and quantity must be non-negative."
-            )
+    def __init__(self, product_name: str, price: float, quantity: int):
+        if not product_name or price <= 0 or quantity < 0:
+            raise ValueError("Invalid product parameters")
         self.product_name = product_name
         self.price = price
         self.quantity = quantity
@@ -48,7 +46,9 @@ class Product:
         if quantity <= 0:
             raise ValueError("Quantity to buys must be greater than zero")
         if quantity > self.quantity:
-            raise ValueError("Not enough quantity in Stock")
+            raise ValueError(f"Error: Requested quantity for {self.name} exceeds available stock.")
+        self.quantity -= quantity
+        return self.price * quantity
 
         total_price = self.price * quantity
         self.quantity -= quantity
