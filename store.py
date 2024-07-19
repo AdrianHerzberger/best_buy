@@ -29,10 +29,10 @@ class Store:
         return product_list
 
     def order(self, shopping_list: List[Tuple[Product, int]]) -> float:
-        total_price = 0
+        total_price = 0.0
         for product, quantity in shopping_list:
             if quantity > product.get_quantity():
-                raise ValueError(f"Error: Requested quantity for {product.name} exceeds available stock.")
+                raise ValueError(f"Error: Requested quantity for {product.product_name} exceeds available stock.")
             if product in self.products:
                 total_price += product.buy(quantity)
         return total_price
